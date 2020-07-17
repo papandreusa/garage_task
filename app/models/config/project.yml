@@ -1,0 +1,33 @@
+instance_name: project
+collection_name: projects
+
+trusted_params:
+  - name
+
+index_attrs:
+  - id
+  - name
+  - author_email
+
+show_attrs:
+  - id
+  - name
+  - author_email
+
+form_attrs:
+  - name
+  - author_email
+
+json_attrs:
+  - id
+  - name
+  - author_email
+
+has_many_assocs:
+  - tasks
+
+attrs_config:
+  id:
+    column_width: 50px
+    name: ID
+    show_method: id

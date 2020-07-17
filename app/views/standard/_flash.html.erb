@@ -1,0 +1,12 @@
+<%  %>
+<% flash.each do |key, value| %>
+	<% type, message = key, value %>
+	<% value.symbolize_keys! if value.is_a?(Hash) %>
+	<% type, message = value[:imporance], value[:message] if value.is_a?(Hash) %>
+	<div  class = "alert alert-success alert-<%= "#{type}" %> alert-dismissible show" role="alert">
+		<%= "#{message}" %>
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">&times;</span>
+  		</button>
+	</div>
+<% end %>

@@ -1,0 +1,11 @@
+<%= render 'standard/show_parent' if @parent_instance %>
+
+<h1><%= @model.instance_name %></h1>
+
+<%= render 'standard/form', instance: @instance %>
+
+<%= link_to 'Show', [@parent_instance, @instance], remote: @remote, class:  'btn btn-info' %>
+<%= link_to 'List', [@parent_instance, @model.collection_name], remote: @remote,  class:  'btn btn-info'  %>
+<div id="flash_container" class="container">
+	<%= render "standard/flash.html" %>
+</div>

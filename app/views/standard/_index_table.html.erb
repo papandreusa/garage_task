@@ -1,0 +1,26 @@
+<div >
+	<table class="table table-sm table-hover table-bordered table-fixed">
+	  <thead>
+	    <tr>
+	      <%  model.index_attrs.each do |attr|%>
+	        <th style='width:<%= model.attr_fetch(attr, :column_width) %>;'><%= model.attr_name(attr) %></th>
+	      <% end %>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <%   collection.each do |record| %>
+	      <tr>
+	        <% model.index_attrs.each do |attr|%>
+	          <td><%= record.attr_value(attr) %></td>
+	        <% end %>
+
+	        <td><%= link_to 'Show', [parent_instance, record], remote: remote, class:  "" %></td>
+	        <td><%= link_to 'Edit', [:edit, parent_instance, record], remote: remote, class:  "" %></td>
+	        <td><%= link_to 'Destroy', [parent_instance, record], method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "" %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

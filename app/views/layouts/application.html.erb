@@ -1,15 +1,30 @@
+<% provide :title, @model ? @model.name : ""%>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GarageTask</title>
+    <title>GarageTask </title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application'%>
+
   </head>
 
-  <body>
-    <%= yield %>
+<body>
+    <%= render 'layouts/header.html' %>
+
+    <div id="main_container" class="container">
+      <%= yield %>
+    </div>
+
+		<% # render 'layouts/debug' if Rails.env.development?  %>
+		<%= render 'layouts/footer.html' %>
   </body>
 </html>
+
+<script>
+	$(document).ready(function(){
+	  autohide_alert();
+	});
+</script>

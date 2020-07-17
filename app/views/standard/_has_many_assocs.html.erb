@@ -1,0 +1,12 @@
+<br/>
+<% @model.get_has_many_assoc_names&.each do |assoc_name| %>
+  <%= content_tag(:div, id: assoc_name.to_s, class: "col-md-11 col-md-offset-1 border") do %>
+    <% has_many_collection = @instance.public_send(assoc_name) %>
+    <% total_entries = has_many_collection.count %>
+		<% assoc_class = @model.get_association(assoc_name).klass %>
+		<h4><%=  link_to assoc_name.to_s.capitalize, [@instance, assoc_name]  %></h4>
+    <%= render 'standard/index_table', collection: has_many_collection, model: assoc_class, parent_instance: @instance, remote: @remote, as: :collection unless total_entries == 0 %>
+		<%= link_to "New #{assoc_class.instance_name}", [:new, @instance, assoc_name.singularize], class:  "btn btn-sm btn-info" %>
+  <% end %>
+	<br/>
+<% end %>

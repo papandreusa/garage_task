@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-11 col-md-offset-1">
+    <%= form_with(model: instance, local: !@remote, url: [@parent_instance, @instance]) do |form| %>
+    <%= render 'standard/errors' %>
+
+      <% @model.trusted_params.each do |attr|%>
+        <div class="field row">
+					<div class="col-md-3 ">
+          	<strong><%= "#{@model.attr_name(attr)}:"%>&nbsp;</strong>
+					</div>
+					<div class="col-md-9 ">
+          	<%= form.text_field attr, class: 'form-control' %>
+					</div>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= form.submit nil, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

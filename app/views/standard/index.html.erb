@@ -1,0 +1,12 @@
+<%= render 'standard/show_parent' if @parent_instance %>
+
+<h1><%= @model.collection_name %></h1>
+<div class='page_entries_info'>Total: <%= pluralize @collection_total_entries, 'record'  %> </div>
+<%= render 'standard/index_table', collection: @collection, model: @model, parent_instance: @parent_instance, remote: @remote, as: :collection %>
+
+<br>
+
+<%= link_to "New #{@model.instance_name}", new_instance_path(parent: @parent_instance), remote: @remote, class:  "btn btn-info" %>
+<div id="flash_container" class="container">
+	<%= render "standard/flash.html" %>
+</div>

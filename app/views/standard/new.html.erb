@@ -1,0 +1,6 @@
+<%= render 'standard/show_parent' if @parent_instance %>
+<h1>New Instance</h1>
+
+<%= render 'standard/form', instance: @instance %>
+
+<%= link_to 'List', [@parent_instance, @model.collection_name], remote: @remote, class: 'btn btn-info' %>

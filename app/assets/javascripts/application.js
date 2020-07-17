@@ -14,3 +14,42 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+$(document).ready(function(){
+  handle_ajax();
+})
+
+function handle_ajax() {
+	console.log('handle_ajax');
+	$("[data-remote]")
+	.on("ajax:success", function(event) {
+    [data, status, xhr] = event.detail;
+		alert(JSON.stringify(event.currentTarget));
+    render_response();
+		render_response_status(data, xhr, event.currentTarget);
+		handle_ajax();
+  })
+	.on("ajax:error", function(event){
+    $("#main_container").html( "<p>ERROR</p>");
+	})
+}
+
+// ------------------------------------------------------------------
+function render_response_status(result, xhr, url) {
+	container = $('footer div.container');
+	container.html('Status: ' + xhr.status + ', Content_type: ' + xhr.getResponseHeader('content-type') + ', url: ' + url);
+}
+
+function render_response() {
+	$("#main_container").html( xhr.responseText);
+	autohide_alert();
+}
+
+function autohide_alert() {
+	$("div.alert").fadeTo(5000, 500).slideUp(500, function(){
+    $(this).remove();
+	});
+}
