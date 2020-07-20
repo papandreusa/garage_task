@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
 		<% container_id = !!parent_instance ? 'card_' + [parent_instance&.class&.instance_name, parent_instance&.id, model.collection_name].compact.join('_') : nil %>
-    <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id}) do |form| %>
+    <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id, onsubmit: "return validateProjectForm;"} ) do |form| %>
     <%= render 'standard/errors' %>
 
       <% @model.trusted_params.each do |attr|%>
@@ -21,3 +21,11 @@
     <% end %>
   </div>
 </div>
+
+<script>
+
+function validateProjectForm() {
+	alert('Validation warning: Your letters are too black ...');
+	return true;
+}
+</script>

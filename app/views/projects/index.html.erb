@@ -1,12 +1,13 @@
 
-<h1><%= @model.collection_name %></h1>
+<h1><%= @model.collection_rendering_name %></h1>
 <% container_id = [@parent_instance&.class&.name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <div id='<%= container_id %>' class='container' >
 	<%= render 'index_table', collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote,  container_id: container_id, as: :collection %>
 </div>
 <br>
-
-<%= link_to "New #{@model.instance_name}", new_instance_path(parent: @parent_instance), remote: @remote, class:  "btn btn-info" %>
+<div class="text-center">
+	<%= link_to "Add #{@model.instance_rendering_name}", new_instance_path(parent: @parent_instance), remote: @remote, class:  "btn btn-info text-white" %>
+</div>
 <div id="flash_container" class="container">
 	<%= render "standard/flash.html" %>
 </div>

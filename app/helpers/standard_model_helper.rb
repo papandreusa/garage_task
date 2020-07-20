@@ -16,12 +16,19 @@ module StandardModelHelper
 		end
 	#-------------------------
 		def instance_name
-
-			self.name.underscore
+			get_model_config[:instance_name] || self.name.underscore
 		end
 	# --------------------------
 		def collection_name
-			self.name.underscore.pluralize
+			get_model_config[:collection_name] || self.name.underscore.pluralize
+		end
+	# -------------------------
+		def instance_rendering_name
+			get_model_config[:instance_rendering_name] || self.name.underscore
+		end
+	# --------------------------
+		def collection_rendering_name
+			get_model_config[:collection_rendering_name] || self.name.underscore.pluralize
 		end
 	# -------------------------
 		# def get_model_config2

@@ -6,8 +6,10 @@ class ProjectsController < StandardController
 	def set_rendering_templates
 		super
 		@index_template = 'index'
-		@index_table_template = "_index_table"
+		@index_table_template = "index"
 		@show_template = 'show'
+		@new_template = 'new'
+		@edit_template = 'edit'
 	end
 
 	def instance_params

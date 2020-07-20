@@ -1,5 +1,7 @@
 instance_name: project
 collection_name: projects
+instance_rendering_name: TODO List
+collection_rendering_name: TODO LISTS
 
 trusted_params:
   - name

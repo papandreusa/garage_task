@@ -10,13 +10,13 @@
           	<strong><%= "#{model.attr_name(attr)}:"%>&nbsp;</strong>
 					</div>
 					<div class="col-md-9 ">
-          	<%= form.text_field attr, class: 'form-control' %>
+          	<%= form.text_field attr, class: 'form-control form-control-sm' %>
 					</div>
         </div>
       <% end %>
 
       <div class="actions">
-        <%= form.submit nil, class: 'btn btn-primary' %>
+        <%= form.submit nil, class: 'btn btn-sm  btn-primary' %>
       </div>
     <% end %>
   </div>

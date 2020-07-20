@@ -60,6 +60,25 @@ function render_status(xhr) {
 	container.html('' + newDate.toLocaleTimeString() + ': Status: ' + xhr.status );
 }
 //------------------------------------------------------------------
+function remote_request(cont_id, url){
+  $.ajax({
+    url: url,
+    dataType: "html",
+    success: function(data, status, xhr){
+      render_success_response(data, status, xhr, cont_id);
+    }
+  });
+}
+//------------------------------------------------------------------
+function toggle_card(cont_id, url) {
+  if ($( "#" + cont_id ).is( ":hidden" )) {
+      $('#card_' + cont_id + '').html('loading ...');
+      remote_request('card_' + cont_id, url);
+  };
+  // $('#' + cont_id).collapse('toggle');
+}
+
+//------------------------------------------------------------------
 function autohide_alert() {
 	$("div.alert").fadeTo(5000, 500).slideUp(500, function(){
     $(this).remove();

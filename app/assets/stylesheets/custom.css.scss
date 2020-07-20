@@ -99,7 +99,10 @@ footer ul li {
 	float: left;
 	margin-left: 15px;
 }
-
+a:hover {
+	color: #222 !important;
+	background-color: #555 !important;
+}
 /* miscellaneous */
 
 .debug_dump {
@@ -147,4 +150,12 @@ footer ul li {
 		color: $state-danger-text;
 
 	}
+}
+.collapse_button:before {
+    font-family: 'FontAwesome';
+    content: "  \f0d7  \f0ae  ";
+		color: white;
+}
+.collapse_button.collapsed:before {
+    content: "  \f0da  \f0ae  ";
 }

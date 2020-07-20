@@ -1,11 +1,11 @@
-<%= render 'standard/show_parent' if @parent_instance %>
-<h2><%= @model.name %></h2>
 <% container_id = 'card_' + [@parent_instance.class.instance_name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <%= render 'standard/instance', instance: @instance, remote: @remote %>
 
 <%= render 'standard/has_many_assocs',  remote: @remote unless @parent_instance %>
-<%= link_to 'Edit', [:edit, @parent_instance, @instance],  remote: @remote, class:  'btn btn-info', target_container: container_id   %>
-<%= link_to 'List', [@parent_instance, @model.collection_name],  remote: @remote, class:  'btn btn-info' , target_container: container_id  %>
+<div>
+	<%= link_to 'Edit', [:edit, @parent_instance, @instance],  remote: @remote, class:  'btn btn-sm btn-info', target_container: container_id   %>
+	<%= link_to 'List', [@parent_instance, @model.collection_name],  remote: @remote, class:  'btn btn-sm btn-info' , target_container: container_id  %>
+</div>
 <div id="flash_container" class="container">
 	<%= render "standard/flash.html" %>
 </div>

@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   belongs_to :project
 	delegate :author_id, :author, to: :project
 
-	validates :name, presence: true, length: { minimum: 2 }
+	validates :name, presence: true, length: { minimum: 3 }
 
 	def authorized(id)
 		return self if self.author_id == id

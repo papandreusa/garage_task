@@ -10,7 +10,6 @@ index_attrs:
   - status
   - deadline
   - priority
-  - project
 
 show_attrs:
   - id
@@ -18,7 +17,6 @@ show_attrs:
   - status
   - deadline
   - priority
-  - project
 
 form_attrs:
   - name

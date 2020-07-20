@@ -1,5 +1,5 @@
 <%= render 'standard/show_parent' if @parent_instance %>
-<h2><%= @model.name %></h2>
+<h2><%= @model.instance_rendering_name %></h2>
 <%= render 'instance', instance: @instance, remote: @remote %>
 
 

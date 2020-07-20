@@ -1,8 +1,8 @@
 class Project < ApplicationRecord
 	belongs_to	:author, class_name: :User, optional: true
-	has_many :tasks
+	has_many :tasks, dependent: :destroy
 
-	validates :name, presence: true, length: { minimum: 2 }
+	validates :name, presence: true, length: { minimum: 3 }
 
 public
 	def author_email

@@ -4,5 +4,8 @@ class TasksController < StandardController
   def set_rendering_templates
     super
     @index_table_template = "_index_table"
-  end
+    @new_template = "new"
+    @edit_template = "edit"
+    @show_template = "show"
+   end
 end

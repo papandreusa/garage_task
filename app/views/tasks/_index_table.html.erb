@@ -1,30 +1,25 @@
 
-  <div class="col-md-11 col-md-offset-1">
+  <div class="col-md">
 		<% instance = Task.new %>
 		<% container_id = 'card_' + [:project, parent_instance.id, :tasks].compact.join('_') %>
     <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id}) do |form| %>
-			<div class="field row">
-				<div class="col-md-9 ">
-					<%= form.text_field 'name', class: 'form-control' %>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+				    <span class="input-group-text"><%= fa_icon 'plus'%></span>
+				  </div>
+						<%= form.text_field 'name', class: 'form-control form-control-sm' %>
+					<div class="input-group-append">
+						<%= form.submit "Add #{model.instance_rendering_name}", class: 'btn btn-sm btn-primary' %>
+		      </div>
 				</div>
-	      <div class=" col-md ">
-	        <%= form.submit nil, class: 'btn btn-primary' %>
-	      </div>
-			</div>
+
     <% end %>
   </div>
 
 
 <% if collection_total_entries != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
-	  <thead>
-	    <tr>
-	      <%  model.index_attrs.each do |attr|%>
-	        <th style='width:<%= model.attr_fetch(attr, :column_width) %>;'><%= model.attr_name(attr) %></th>
-	      <% end %>
-	      <th colspan="3"></th>
-	    </tr>
-	  </thead>
 
 	  <tbody>
 	    <%   collection.each do |record| %>
@@ -32,13 +27,14 @@
 	        <% model.index_attrs.each do |attr| %>
 	          <td><%= record.attr_value(attr) %></td>
 	        <% end %>
-
-	        <td><%= link_to 'Show', [parent_instance, record], remote: remote, class:  "", target_container: container_id %></td>
-	        <td><%= link_to 'Edit', [:edit, parent_instance, record], remote: remote, class:  "", target_container: container_id %></td>
-	        <td><%= link_to 'Destroy', polymorphic_url([parent_instance, record]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", target_container: container_id %></td>
+					<td class="text-right">
+		        <%= link_to [parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "view" do fa_icon 'eye' end %>&nbsp;
+		        <%= link_to [:edit, parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "edit" do fa_icon 'edit' end %>&nbsp;
+		        <%= link_to polymorphic_url([parent_instance, record]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", target_container: container_id, title: "trash" do fa_icon 'trash' end %>
+					</td>
 	      </tr>
 	    <% end %>
 	  </tbody>
 	</table>
 <% end %>
-<div class='bg-secondary'>Total: <%= pluralize collection_total_entries, 'record'  %> </div>
+<div class='bg-light'>Total: <%= pluralize collection_total_entries, model.instance_rendering_name  %> </div>

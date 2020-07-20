@@ -73,7 +73,7 @@ class StandardController < ApplicationController
         format.json { render @show_template, status: :created, location: @instance, locals: {status: 200} }
       else
 				flash.now[:error] = "#{@model.instance_name} was not created."
-        format.html { render @new_template, status: 422 }
+        format.html { render @new_template, layout: @layout, locals: {status: 422} }
         # format.any { render "standard/errors", status: :unprocessable_entity, formats: :json, content_type: 'application/json', locals: {status: 422}   }
         format.json { render json: @instance.errors, status: :unprocessable_entity, locals: {status: 422}   }
       end
@@ -85,7 +85,7 @@ class StandardController < ApplicationController
     respond_to do |format|
       if @instance.update(instance_params)
 				flash.now[:info] = "#{@model.instance_name} was successfully updated."
-				render( @show_template, layout: false, locals: {instance: @instance} ) and return if request.xhr?
+				render( @show_template, layout: false, locals: {instance: @instance, remote: @remote} ) and return if request.xhr?
         format.html { redirect_to [@parent_instance, @instance] }
         format.json { render @show_template, status: :ok, location: @instance }
       else
