@@ -1,0 +1,8 @@
+<%= render 'standard/show_parent' if @parent_instance %>
+<h2><%= @model.name %></h2>
+<%= render 'instance', instance: @instance, remote: @remote %>
+
+
+<div id="flash_container" class="container">
+	<%= render "standard/flash.html" %>
+</div>

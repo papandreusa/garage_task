@@ -1,9 +1,8 @@
-<%= render 'standard/show_parent' if @parent_instance %>
 
 <h1><%= @model.collection_name %></h1>
 <% container_id = [@parent_instance&.class&.name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <div id='<%= container_id %>' class='container' >
-	<%= render 'standard/index_table', collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote,  container_id: container_id, as: :collection %>
+	<%= render 'index_table', collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote,  container_id: container_id, as: :collection %>
 </div>
 <br>
 

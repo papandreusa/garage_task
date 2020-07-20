@@ -16,9 +16,9 @@
 				<li>
 					<%=
 					if @remote
-					 	link_to "Disable AJAX", process_ajax_path(ajax_request: false),  class: "nav-link text-warning"
+					 	link_to "AJAX enabled", process_ajax_path(ajax_request: false),  class: "nav-link text-warning border", data: {toggle: "tooltip", placement: "bottom"}, title: "Press to disable AJAX"
 					else
-						link_to "Enable AJAX", process_ajax_path(ajax_request: true),  class: "nav-link text-warning"
+						link_to "AJAX enabled", process_ajax_path(ajax_request: true),  class: "nav-link text-secondary border", data: {toggle: "tooltip", placement: "bottom"}, title: "Press to enable AJAX"
 					end
 					%>
 				</li>

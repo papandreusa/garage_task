@@ -65,6 +65,8 @@ gem 'colorize'
 #  Rails' Default Request Logging
 gem 'lograge'
 #
+gem "font-awesome-rails"
+#
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.5.0'
 #

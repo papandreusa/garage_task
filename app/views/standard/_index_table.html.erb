@@ -1,4 +1,5 @@
-<div >
+
+<% if collection_total_entries != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
 	  <thead>
 	    <tr>
@@ -18,9 +19,10 @@
 
 	        <td><%= link_to 'Show', [parent_instance, record], remote: remote, class:  "" %></td>
 	        <td><%= link_to 'Edit', [:edit, parent_instance, record], remote: remote, class:  "" %></td>
-	        <td><%= link_to 'Destroy', [parent_instance, record], method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "" %></td>
+	        <td><%= link_to 'Destroy', polymorphic_url([parent_instance, record]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "" %></td>
 	      </tr>
 	    <% end %>
 	  </tbody>
 	</table>
-</div>
+<% end %>
+<div class='bg-secondary'>Total: <%= pluralize collection_total_entries, 'record'  %> </div>

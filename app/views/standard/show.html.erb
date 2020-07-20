@@ -1,21 +1,10 @@
 <%= render 'standard/show_parent' if @parent_instance %>
-
 <h2><%= @model.name %></h2>
-<div class="row">
-  <div class="col-md-11 col-md-offset-1">
-		<% @model.show_attrs.each do |attr| %>
-			<div class="field row">
-				<div class="col-md-3 ">
-			  <strong><%= "#{@model.attr_name(attr)}:"%>&nbsp;</strong>
-				</div>
-			  <%= @instance.public_send(@model.attr_show_method(attr)) %>
-			</div>
-		<% end %>
-		<%= link_to 'Edit', [:edit, @parent_instance, @instance],  remote: @remote, class:  'btn btn-info'  %>
-		<%= link_to 'List', [@parent_instance, @model.collection_name],  remote: @remote, class:  'btn btn-info'  %>
-	</div>
-</div>
-<%= render 'standard/has_many_assocs' unless @parent_instance %>
+<%= render 'standard/instance', instance: @instance, remote: @remote %>
+
+<%= render 'standard/has_many_assocs',  remote: @remote unless @parent_instance %>
+<%= link_to 'Edit', [:edit, @parent_instance, @instance],  remote: @remote, class:  'btn btn-info'  %>
+<%= link_to 'List', [@parent_instance, @model.collection_name],  remote: @remote, class:  'btn btn-info'  %>
 <div id="flash_container" class="container">
 	<%= render "standard/flash.html" %>
 </div>

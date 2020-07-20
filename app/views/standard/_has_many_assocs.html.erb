@@ -5,8 +5,11 @@
     <% total_entries = has_many_collection.count %>
 		<% assoc_class = @model.get_association(assoc_name).klass %>
 		<h4><%=  link_to assoc_name.to_s.capitalize, [@instance, assoc_name]  %></h4>
-    <%= render 'standard/index_table', collection: has_many_collection, model: assoc_class, parent_instance: @instance, remote: @remote, as: :collection unless total_entries == 0 %>
-		<%= link_to "New #{assoc_class.instance_name}", [:new, @instance, assoc_name.singularize], class:  "btn btn-sm btn-info" %>
+		<% container_id = [@instance&.class&.name, @instance&.id, assoc_name].compact.join('_') %>
+		<div id='<%= container_id %>' class='container' >
+    	<%= render 'standard/index_table', collection: has_many_collection, model: assoc_class, parent_instance: @instance, collection_total_entries: total_entries, remote: remote, as: :collection  %>
+    </div>
+		<%= link_to "New #{assoc_class.instance_name}", [:new, @instance, assoc_name.singularize], remote: remote, class:  "btn btn-sm btn-info" %>
   <% end %>
 	<br/>
 <% end %>

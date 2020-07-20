@@ -1,16 +1,14 @@
 class ProjectsController < StandardController
-	# respond_to :html, :json, :ajax
 
-	# def index
-	# 	flash.now[:info] = "#{@model.collection_name} loaded"
-	# 	respond_to do |format|
-	# 		format.html { render "standard/index", locals: {status: 200} }
-	# 		format.ajax { render "index", layout: "application.html", locals: {status: 200} }
-	# 		format.json { render "standard/index", locals: {status: 200} }
-	# 	end
-	# end
 
 	private
+
+	def set_rendering_templates
+		super
+		@index_template = 'index'
+		@index_table_template = "_index_table"
+		@show_template = 'show'
+	end
 
 	def instance_params
     super_params = super

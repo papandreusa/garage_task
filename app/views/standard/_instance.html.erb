@@ -1,0 +1,13 @@
+
+<div class="row">
+  <div class="col-md-11 col-md-offset-1">
+    <% @model.show_attrs.each do |attr| %>
+      <div class="field row">
+        <div class="col-md-3 ">
+        <strong><%= "#{@model.attr_name(attr)}:"%>&nbsp;</strong>
+        </div>
+        <%= @instance.public_send(@model.attr_show_method(attr)) %>
+      </div>
+    <% end %>
+  </div>
+</div>

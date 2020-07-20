@@ -1,0 +1,48 @@
+<% container_id = [:project, instance.id, :tasks].compact.join('_') %>
+<div class="border">
+  <div class = "bg-info">
+    <div class="col-md row ">
+      <div class="col-md-1 ">
+        <%= link_to '+', "javascript:void(0);", target_container: "#{container_id}", onClick: "toggle_card('#{container_id}', '#{polymorphic_url([instance, :tasks])}'); " %>
+      </div>
+      <div class="col-md-1 ">
+        <%= instance.id %>
+      </div>
+      <div class="col-md-6 ">
+        <%= instance.name %>
+      </div><div class="col-md-1 ">
+        <%= instance.author.name %>
+      </div >
+      <div class="col-md">
+        <%= link_to 'Show', [instance], remote: remote, class:  ""  %>
+        <%= link_to 'Edit', [:edit, instance], remote: remote, class:  ""  %>
+        <%= link_to 'Destroy', polymorphic_url([instance]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "" %>
+      </div>
+    </div>
+  </div>
+  <div id="<%= container_id %>" class="collapse" >
+    <div id="<%= "card_#{container_id}" %>" class="card card-body" >
+      tasks
+    </div>
+  </div>
+</div>
+
+<script>
+function toggle_card(cont_id, url) {
+  if ($( "#" + cont_id ).is( ":hidden" )) {
+      $('#card_' + cont_id + '').html('loading ...');
+      remote_request('card_' + cont_id, url);
+  };
+  $('#' + cont_id).collapse('toggle');
+}
+
+function remote_request(cont_id, url){
+  $.ajax({
+    url: url,
+    dataType: "html",
+    success: function(data, status, xhr){
+      render_success_response(data, status, xhr, cont_id);
+    }
+  });
+}
+</script>
