@@ -22,7 +22,7 @@ class StandardController < ApplicationController
 	# ----------------------------------------------------------------------------------
   def index
 		# set_collection
-    flash.now[:info] = "#{@model.collection_name} loaded"
+    flash.now[:info] = "#{@model.collection_rendering_name} loaded"
 		render(@index_table_template, layout: false, locals: {status: 200, collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote}) and return if request.xhr?
 
 		respond_to do |format|
@@ -35,7 +35,7 @@ class StandardController < ApplicationController
 	# ----------------------------------------------------------------------------------
 
   def show
-  	flash.now[:info] = "#{@model.instance_name} loaded"
+  	flash.now[:info] = "#{@model.instance_rendering_name} loaded"
 		render(@show_template, layout: false, locals: {status: 200, model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote}) and return if request.xhr?
 
 		respond_to do |format|
@@ -45,24 +45,26 @@ class StandardController < ApplicationController
 			format.any { render plain: 'unknown format', layout: "application.html" }
 		end
   end
-
+	# ----------------------------------------------------------------------------------
 
   def new
     @instance = !!@parent_instance ? @parent_instance.public_send(params[:controller]).build() : @model.new()
+		render(@form_template, layout: false, locals: {status: 200, model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote}) and return if request.xhr?
     render @new_template, layout: @layout, locals: {instance: @instance}
   end
-
+	# ----------------------------------------------------------------------------------
   def edit
+		render(@form_template, layout: false, locals: {status: 200, model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote}) and return if request.xhr?
   	render @edit_template, layout: @layout, locals: {instance: @instance}
   end
-
+	# ----------------------------------------------------------------------------------
 
   def create
     @instance = !!@parent_instance ? @parent_instance.public_send(params[:controller]).build(instance_params) : @model.new(instance_params)
 
     respond_to do |format|
       if @instance.save
-				flash.now[:info] = "#{@model.instance_name} was successfully created."
+				flash.now[:info] = "#{@model.instance_rendering_name} was successfully created."
 				if request.xhr?
 					set_collection
 					render @index_table_template, layout: false, locals: {status: 200, collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote}
@@ -72,35 +74,35 @@ class StandardController < ApplicationController
         # format.html { render "standard/show", status: :created, location: @instance, formats: :json, content_type: 'application/json', locals: {status: 204}  }
         format.json { render @show_template, status: :created, location: @instance, locals: {status: 200} }
       else
-				flash.now[:error] = "#{@model.instance_name} was not created."
+				flash.now[:error] = "#{@model.instance_rendering_name} was not created."
         format.html { render @new_template, layout: @layout, locals: {status: 422} }
         # format.any { render "standard/errors", status: :unprocessable_entity, formats: :json, content_type: 'application/json', locals: {status: 422}   }
         format.json { render json: @instance.errors, status: :unprocessable_entity, locals: {status: 422}   }
       end
     end
   end
-
+	# ----------------------------------------------------------------------------------
 
   def update
     respond_to do |format|
       if @instance.update(instance_params)
-				flash.now[:info] = "#{@model.instance_name} was successfully updated."
-				render( @show_template, layout: false, locals: {instance: @instance, remote: @remote} ) and return if request.xhr?
+				flash.now[:info] = "#{@model.instance_rendering_name} was successfully updated."
+				render( @instance_template, layout: false, locals: {status: 200, model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote} ) and return if request.xhr?
         format.html { redirect_to [@parent_instance, @instance] }
         format.json { render @show_template, status: :ok, location: @instance }
       else
-				flash.now[:error] = "#{@model.instance_name} was not updated."
+				flash.now[:error] = "#{@model.instance_rendering_name} was not updated."
         format.html { render @edit_template, layout: @layout }
         format.json { render json: @instance.errors, status: :unprocessable_entity }
       end
     end
   end
-
+	# ----------------------------------------------------------------------------------
 
   def destroy
   	respond_to do |format|
 	   	if @instance.destroy
-	   		flash[:info] = Hash( importance: :error, :message => "#{@model.instance_name} is deleted!")
+	   		flash[:info] = "#{@model.instance_rendering_name} was deleted!"
 				if request.xhr?
 					set_collection
 					render @index_table_template, layout: false, locals: {status: 200, collection: @collection, model: @model, parent_instance: @parent_instance, collection_total_entries: @collection_total_entries, remote: @remote}
@@ -160,7 +162,13 @@ class StandardController < ApplicationController
 		@show_template = "standard/show"
 		@edit_template = "standard/edit"
 		@new_template = "standard/new"
-
+		@instance_template = "standard/_instance"
+		@form_template = "standard/_form"
+		@xhr_new_template = "standard/_form"
+		@xhr_edit_template = "standard/_form"
+		@xhr_after_create_template = "standard/_index_table"
+		@xhr_after_update_template = "standard/_index_table"
+		@xhr_after_delete_template = "standard/_index_table"
 	end
 # ------------------------------------------------------------------
 	def set_associated_variables

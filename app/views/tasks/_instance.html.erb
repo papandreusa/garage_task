@@ -1,13 +1,17 @@
-
+<% container_id = 'card_' + [parent_instance&.class&.instance_name, parent_instance&.id, model.collection_name].compact.join('_') %>
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
-    <% @model.show_attrs.each do |attr| %>
+    <% model.show_attrs.each do |attr| %>
       <div class="field row">
         <div class="col-md-3 ">
-        <strong><%= "#{@model.attr_name(attr)}:"%>&nbsp;</strong>
+        <strong><%= "#{model.attr_name(attr)}:"%>&nbsp;</strong>
         </div>
-        <%= @instance.public_send(@model.attr_show_method(attr)) %>
+        <%= instance.public_send(model.attr_show_method(attr)) %>
       </div>
     <% end %>
   </div>
+</div>
+<div>
+	<%= link_to 'Edit', [:edit, parent_instance, instance],  remote: remote, class:  'btn btn-sm btn-info', target_container: container_id   %>
+	<%= link_to "#{model.collection_rendering_name}", [parent_instance, model.collection_name],  remote: remote, class:  'btn btn-sm btn-info' , target_container: container_id  %>
 </div>

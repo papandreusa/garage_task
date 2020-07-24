@@ -1,6 +1,4 @@
+<%= render 'standard/show_parent' if @parent_instance %>
 <h3>New <%= @model.instance_rendering_name %></h3>
 <% container_id = !!@parent_instance ? 'card_' + [@parent_instance&.class&.instance_name, @parent_instance&.id, @model.collection_name].compact.join('_') : nil %>
 <%= render 'form', model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote %>
-<div>
-	<%= link_to 'List', [@parent_instance, @model.collection_name], remote: @remote, class: 'btn btn-sm btn-info', target_container: container_id  %>
-</div>

@@ -1,4 +1,4 @@
-<h2>
-	<%= "Project: " %>
+<h2 class="text-left">
+	<%= "#{@parent_instance.class.instance_rendering_name}: " %>
 	<%= link_to "#{@parent_instance.to_s}", @parent_instance,  remote: @remote, class:  '' %>
 </h2>

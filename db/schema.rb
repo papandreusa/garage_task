@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_083702) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name", null: false
+    t.text "description"
     t.integer "author_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -22,7 +23,7 @@ ActiveRecord::Schema.define(version: 2020_07_09_083702) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "name", null: false
-    t.string "priority", default: "normal", null: false
+    t.integer "priority", default: 3, null: false
     t.string "status", default: "unknown", null: false
     t.datetime "deadline"
     t.integer "project_id"

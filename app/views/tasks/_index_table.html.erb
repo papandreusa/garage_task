@@ -1,12 +1,12 @@
 
-  <div class="col-md">
+  <div class="">
 		<% instance = Task.new %>
 		<% container_id = 'card_' + [:project, parent_instance.id, :tasks].compact.join('_') %>
     <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id}) do |form| %>
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
-				    <span class="input-group-text"><%= fa_icon 'plus'%></span>
+						<%= link_to [:new, parent_instance, model.instance_name], remote: remote, class:  "btn btn-sm ", target_container: container_id, title: "new" do fa_icon 'plus' end %>
 				  </div>
 						<%= form.text_field 'name', class: 'form-control form-control-sm' %>
 					<div class="input-group-append">
@@ -20,15 +20,26 @@
 
 <% if collection_total_entries != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
-
+		<thead >
+	    <tr class=''>
+	      <%  model.index_attrs.each do |attr|%>
+	        <th style='padding: 0px;  <%= !!(cw = model.attr_fetch(attr, :column_width)) ? "width: #{cw};" : '' %> '></th>
+	      <% end %>
+	      <th style='padding: 0px; width: 100px;' ></th>
+	    </tr>
+	  </thead>
 	  <tbody>
 	    <%   collection.each do |record| %>
 	      <tr>
 	        <% model.index_attrs.each do |attr| %>
-	          <td><%= record.attr_value(attr) %></td>
+	          <td>
+							<span title ="<%= model.attr_name(attr) %>">
+								<%= record.attr_value(attr) %>
+							</span>
+						</td>
 	        <% end %>
 					<td class="text-right">
-		        <%= link_to [parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "view" do fa_icon 'eye' end %>&nbsp;
+		        <%# link_to [parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "view" do fa_icon 'eye' end %>&nbsp;
 		        <%= link_to [:edit, parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "edit" do fa_icon 'edit' end %>&nbsp;
 		        <%= link_to polymorphic_url([parent_instance, record]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", target_container: container_id, title: "trash" do fa_icon 'trash' end %>
 					</td>
@@ -38,3 +49,4 @@
 	</table>
 <% end %>
 <div class='bg-light'>Total: <%= pluralize collection_total_entries, model.instance_rendering_name  %> </div>
+<br/>

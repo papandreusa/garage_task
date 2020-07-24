@@ -1,6 +1,6 @@
 <% provide :title, @model ? @model.name : ""%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>GarageTask </title>
     <%= csrf_meta_tags %>
@@ -11,10 +11,10 @@
 
   </head>
 
-<body>
+	<body class="h-100">
     <%= render 'layouts/header.html' %>
 
-    <div id="main_container" class="container">
+    <div id="main_container" class="container ">
       <%= yield %>
     </div>
 

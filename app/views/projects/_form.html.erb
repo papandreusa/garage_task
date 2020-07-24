@@ -1,22 +1,30 @@
 <div class="row">
   <div class="col-md-11 col-md-offset-1">
 		<% container_id = !!parent_instance ? 'card_' + [parent_instance&.class&.instance_name, parent_instance&.id, model.collection_name].compact.join('_') : nil %>
-    <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id, onsubmit: "return validateProjectForm;"} ) do |form| %>
+    <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id, onSubmit: "return validateProjectForm;"} ) do |form| %>
     <%= render 'standard/errors' %>
 
-      <% @model.trusted_params.each do |attr|%>
+
         <div class="field row">
 					<div class="col-md-3 ">
-          	<strong><%= "#{model.attr_name(attr)}:"%>&nbsp;</strong>
+          	<strong><%= "name:"%>&nbsp;</strong>
 					</div>
 					<div class="col-md-9 ">
-          	<%= form.text_field attr, class: 'form-control' %>
+          	<%= form.text_field :name, class: 'form-control form-control-sm' %>
 					</div>
         </div>
-      <% end %>
+				<div class="field row">
+					<div class="col-md-3 ">
+						<strong><%= "desctiption:"%>&nbsp;</strong>
+					</div>
+					<div class="col-md-9 ">
+						<%= form.text_area :description, class: 'form-control form-control-sm' %>
+					</div>
+				</div>
+
 
       <div class="actions">
-        <%= form.submit nil, class: 'btn btn-primary' %>
+        <%= form.submit nil, class: 'btn btn-sm btn-primary' %>
       </div>
     <% end %>
   </div>

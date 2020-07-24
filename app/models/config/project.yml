@@ -5,24 +5,29 @@ collection_rendering_name: TODO LISTS
 
 trusted_params:
   - name
+  - description
 
 index_attrs:
   - id
   - name
+  - description
   - author_email
 
 show_attrs:
   - id
   - name
+  - description
   - author_email
 
 form_attrs:
   - name
+  - description
   - author_email
 
 json_attrs:
   - id
   - name
+  - description
   - author_email
 
 has_many_assocs:

@@ -1,31 +1,26 @@
 <% container_id = [:project, instance.id, :tasks].compact.join('_') %>
-<div class="border">
-  <div class = "bg-info text-white">
-    <div class="col-md row ">
-      <div class="col-md-1 ">
-        <%= link_to  '', "javascript:void(0);", target_container: "#{container_id}", onClick: "toggle_card('#{container_id}', '#{polymorphic_url([instance, :tasks])}'); ", data: {toggle: 'collapse', target: "##{container_id}"}, class: "collapsed collapse_button"  %>
-
-
+<div id = "project_<%=instance.id%>" class="border rounded-sm" >
+  <div class = "" >
+    <div class=" project_title rounded-sm">
+			<div class="row">
+	      <div class="col-md-1 ">
+	        <%= link_to  '', "javascript:void(0);", target_container: "#{container_id}", onClick: "toggle_card('#{container_id}', '#{polymorphic_url([instance, :tasks])}'); ", data: {toggle: 'collapse', target: "##{container_id}"}, class: "collapsed collapse_button"  %>
+				</div>
+	       <div class="col-md-7 ">
+	        <%= instance.name %>
+	      </div><div class="col-md-2" title="author of TODO list" >
+	        <%= instance.author.email %>
+	      </div >
+	      <div class="col-md text-right">
+	        <%# link_to  [instance], remote: remote, class:  "", title: "view"  do fa_icon 'eye', class: "text-white" end %>&nbsp;
+	        <%= link_to  [:edit, instance], remote: remote, class:  "", title: "edit"  do fa_icon 'edit', class: "text-white" end %>&nbsp;
+	        <%= link_to  polymorphic_url([instance]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", title: "delete" do fa_icon 'trash', class: "text-white" end %>
+	      </div>
 			</div>
-       <div class="col-md-6 ">
-        <%= instance.name %>
-      </div><div class="col-md-1" title="author of TODO list" >
-        <%= instance.author.name %>
-      </div >
-      <div class="col-md text-right">
-        <%= link_to  [instance], remote: remote, class:  "", title: "view"  do fa_icon 'eye', class: "text-white" end %>&nbsp;
-        <%= link_to  [:edit, instance], remote: remote, class:  "", title: "edit"  do fa_icon 'edit', class: "text-white" end %>&nbsp;
-        <%= link_to  polymorphic_url([instance]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", title: "delete" do fa_icon 'trash', class: "text-white" end %>
-      </div>
     </div>
   </div>
   <div id="<%= container_id %>" class="collapse" >
-    <div id="<%= "card_#{container_id}" %>" class="card card-body" >
-      tasks
+    <div id="<%= "card_#{container_id}" %>" class="card card-body" style="max-height: 500px; min-height: 150px; overflow-y: scroll;">
     </div>
   </div>
 </div>
-
-<script>
-
-</script>

@@ -24,11 +24,11 @@ module StandardModelHelper
 		end
 	# -------------------------
 		def instance_rendering_name
-			get_model_config[:instance_rendering_name] || self.name.underscore
+			get_model_config[:instance_rendering_name] || self.name.scan(/[A-Z][a-z]*/).join(" ")
 		end
 	# --------------------------
 		def collection_rendering_name
-			get_model_config[:collection_rendering_name] || self.name.underscore.pluralize
+			get_model_config[:collection_rendering_name] || self.name.scan(/[A-Z][a-z]*/).join(" ").pluralize
 		end
 	# -------------------------
 		# def get_model_config2

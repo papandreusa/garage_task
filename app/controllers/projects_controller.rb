@@ -10,6 +10,8 @@ class ProjectsController < StandardController
 		@show_template = 'show'
 		@new_template = 'new'
 		@edit_template = 'edit'
+		@instance_template = "show"
+		@form_template = "edit"
 	end
 
 	def instance_params

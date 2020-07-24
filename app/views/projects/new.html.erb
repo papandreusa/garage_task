@@ -2,4 +2,4 @@
 
 <%= render 'form', model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote %>
 
-<%= link_to 'List', [@parent_instance, @model.collection_name], remote: @remote, class: 'btn btn-info' %>
+<%= link_to "#{@model.collection_rendering_name}", [@parent_instance, @model.collection_name], remote: @remote, class: 'btn btn-info' %>

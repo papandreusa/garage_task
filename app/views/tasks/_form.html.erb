@@ -3,21 +3,47 @@
 		<% container_id = !!parent_instance ? 'card_' + [parent_instance&.class&.instance_name, parent_instance&.id, model.collection_name].compact.join('_') : nil %>
     <%= form_with(model: instance, local: !remote, url: [parent_instance, instance], html: {target_container: container_id}) do |form| %>
     <%= render 'standard/errors' %>
-
-      <% @model.trusted_params.each do |attr|%>
         <div class="field row">
 					<div class="col-md-3 ">
-          	<strong><%= "#{model.attr_name(attr)}:"%>&nbsp;</strong>
+          	<strong><%= "#{model.attr_name(:name)}:"%>&nbsp;</strong>
 					</div>
 					<div class="col-md-9 ">
-          	<%= form.text_field attr, class: 'form-control form-control-sm' %>
+          	<%= form.text_field :name, class: 'form-control form-control-sm' %>
 					</div>
         </div>
-      <% end %>
+				<div class="field row">
+					<div class="col-md-3 ">
+						<strong><%= "#{model.attr_name(:priority)}:"%>&nbsp;</strong>
+					</div>
+					<div class="col-md-9 ">
+						<%= form.select :priority, Task.priorities.keys, {},{class: 'custom-select custom-select-sm'} %>
+					</div>
+				</div>
+				<div class="field row">
+					<div class="col-md-3 ">
+						<strong><%= "#{model.attr_name(:deadline)}:"%>&nbsp;</strong>
+					</div>
+					<div class="col-md-9 ">
+						<%= form.date_field :deadline, class: 'form-control form-control-sm' %>
+					</div>
+				</div>
+				<div class="field row">
+					<div class="col-md-3 ">
+						<strong><%= "#{model.attr_name(:status)}:"%>&nbsp;</strong>
+					</div>
+					<div class="col-md-9 ">
+						<%= form.select :status, Task.statuses.keys, {}, {class: 'custom-select custom-select-sm'} %>
+					</div>
+				</div>
+
 
       <div class="actions">
         <%= form.submit nil, class: 'btn btn-sm  btn-primary' %>
       </div>
     <% end %>
   </div>
+</div>
+<div>
+	<%# link_to( 'Show', [@parent_instance, @instance], remote: @remote, class:  'btn btn-sm btn-info', target_container: container_id) %>
+	<%= link_to "#{model.collection_rendering_name}", [parent_instance, model.collection_name], remote: remote,  class:  'btn btn-sm btn-info', target_container: container_id  %>
 </div>

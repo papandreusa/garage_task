@@ -1,35 +1,33 @@
 trusted_params:
   - name
-  - status
-  - deadline
   - priority
+  - deadline
+  - status
 
 index_attrs:
-  - id
   - name
-  - status
-  - deadline
   - priority
+  - deadline
+  - status
 
 show_attrs:
-  - id
   - name
-  - status
-  - deadline
   - priority
+  - deadline
+  - status
 
 form_attrs:
   - name
-  - status
-  - deadline
   - priority
+  - deadline
+  - status
 
 json_attrs:
   - id
   - name
-  - status
-  - deadline
   - priority
+  - deadline
+  - status
 
 has_many_assocs:
 
@@ -40,7 +38,7 @@ attrs_config:
     name: ID
     show_method: id
   name:
-    column_width: 200px
+    # column_width: 200px
     name: Name
   status:
     column_width: 100px
@@ -48,6 +46,7 @@ attrs_config:
   deadline:
     column_width: 100px
     name: Deadline Date
+    show_method: deadline_f
   priority:
     column_width: 100px
     name: Priority

@@ -1,27 +1,20 @@
+index_attrs:
+  - id
 
 
-
-:index_attrs:
-  - :id
-
-
-:show_attrs:
-  - :id
+show_attrs:
+  - id
 
 
-:form_attrs:
+form_attrs:
 
 
-:json_attrs:
-  - :id
+json_attrs:
+  - id
 
 
-:attrs_config:
-  :id:
-    :column_with: '20px'
-    :name: 'ID'
-    :show_method: :id
-  :name:
-    :column_with: '40px'
-    :name: 'Name'
-    :show_method: :name
+attrs_config:
+  id:
+    column_with: 20px
+    name: ID
+    show_method: id

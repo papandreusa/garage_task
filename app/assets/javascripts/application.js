@@ -57,7 +57,7 @@ function render_data(xhr, container_id) {
 function render_status(xhr) {
 	container = $('footer div.container');
   newDate = new Date();
-	container.html('' + newDate.toLocaleTimeString() + ': Status: ' + xhr.status );
+	container.html('' + newDate.toLocaleTimeString() + ' ---  Status: ' + xhr.status );
 }
 //------------------------------------------------------------------
 function remote_request(cont_id, url){
