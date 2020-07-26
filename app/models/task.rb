@@ -5,15 +5,16 @@ class Task < ApplicationRecord
 	validates :name, presence: true, length: { minimum: 3 }
 
 	enum priority: { "very low" => 1, "low" => 2, "normal" => 3, "high" => 4, "very high" => 5}
-	enum status: { processing: "processing", done: "done", unknown: "unknown"}
+	enum status: { processing: "processing", completed: "completed", unknown: "unknown"}
 
 	# SELECT DISTINCT "tasks"."status" FROM "tasks" ORDER BY status ASC
 	scope :all_statuses, ->{select(:status).distinct.order('status asc')}
+
 # SELECT  tasks.* FROM tasks LEFT OUTER JOIN projects ON projects.id = tasks.project_id WHERE (projects.name like "N%")
-	scope :beginning_n, ->{left_joins(:project).where('projects.name like "N%"')}
+	scope :begins_with_n, ->{left_joins(:project).where('projects.name like "N%"')}
 
 # SELECT  tasks.* FROM tasks WHERE tasks.name IN (SELECT tasks.name FROM tasks GROUP BY tasks.name HAVING (count(*)>1)) ORDER BY name
-	scope	:with_duplicate_name, ->{where(name: Task.select(:name).group(:name).having('count(*)>1')).order('name')}
+	scope	:with_duplicate_names, ->{where(name: Task.select(:name).group(:name).having('count(*)>1')).order('name')}
 
 	def deadline_f
 		!!(dl = self.deadline) ? dl.strftime("%F ") : "not set"

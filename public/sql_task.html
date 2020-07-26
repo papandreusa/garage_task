@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQL Task</title>
+
+<style>
+	body {
+		background-color: #EFEFEF;
+		color: #2E2F30;
+		text-align: left;
+		font-family: arial, sans-serif;
+		margin: 0;
+	}
+</style>
+</head>
+
+<body class="rails-default-error-page">
+  <!-- This file lives in public/404.html -->
+<h1> SQL Task </h1>
+<div class='container'>
+	<ul>
+		<li>
+		<h4> get all statuses, not repeating, alphabetically ordered:</h4>
+			method all_statuses in Task model
+			<br/>	<br/>
+			SELECT DISTINCT "tasks"."status" FROM "tasks" ORDER BY status ASC
+		</li>
+		<li>
+		<h4>get the count of all tasks in each project, order by tasks count descending:</h4>
+			method tasks_count in Project model
+			<br/>	<br/>
+			SELECT projects.*, count(tasks.id) as tasks_count FROM projects LEFT JOIN tasks  ON tasks.project_id = projects.id  GROUP BY projects.id  ORDER BY tasks_count DESC
+		</li>
+		<li>
+		<h4>get the count of all tasks in each project, order by projects names:</h4>
+			method tasks_count_by_name in Project model
+			<br/><br/>
+			SELECT projects.*, count(tasks.id) as tasks_count FROM projects LEFT JOIN tasks  ON tasks.project_id = projects.id  GROUP BY projects.id  ORDER BY projects.name
+		</li>
+		<li>
+		<h4>get the tasks for all projects having the name beginning with "N" letter:</h4>
+			method begins_with_n in Task model
+			<br/>	<br/>
+			SELECT  tasks.* FROM tasks LEFT OUTER JOIN projects ON projects.id = tasks.project_id WHERE (projects.name like "N%")
+		</li>
+		<li>
+		<h4>get the list of all projects containing the 'a' letter in the middle of the name, and show the tasks count near each project. Mention that there can exist projects without tasks and tasks with project_id = NULL:</h4>
+			method contains_a in Project model
+			<br/>	<br/>
+			SELECT projects.*, count(tasks.id) as tasks_count FROM projects LEFT JOIN tasks  ON tasks.project_id = projects.id  WHERE projects.name LIKE "%a%" GROUP BY projects.id
+		</li>
+		<li>
+		<h4>get the list of tasks with duplicate names. Order alphabetically:</h4>
+			method with_duplicate_names in Task model
+				<br/>	<br/>
+			SELECT  tasks.* FROM tasks WHERE tasks.name IN (SELECT tasks.name FROM tasks GROUP BY tasks.name HAVING (count(*)>1)) ORDER BY name
+		</li>
+		<li>
+		<h4>get list of tasks having several exact matches of both name and status, from the project 'Garage'. Order by matches count:</h4>
+			!!!!! I could not understand what to do. Therefore I changed the task:<br/>
+			get the list of projects that have tasks with several matches of both name and status of tasks contained in the project 'Garage'. Order by matches count
+			<br/> <br/>
+			method matches_count in Project model
+			<br/>	<br/>
+			select projects.*, count(tasks.id) as matches_count  from projects left  join tasks on tasks.project_id = projects.id where (projects.name != "Garage" and  (tasks.name, tasks.status) in (select tasks.name, tasks.status from tasks left join projects on tasks.project_id = projects.id where projects.name = "Garage")) group by projects.id order by count(tasks.id) desc
+		</li>
+		<li>
+		<h4>get the list of project names having more than 10 tasks in status 'completed'. Order by project_id:</h4>
+			method more_10_tasks in Project model
+			<br/>	<br/>
+			select projects.name  from projects left  join tasks on tasks.project_id = projects.id  group by projects.id having (count(tasks) > 10) order by projects.id
+		</li>
+	</ul>
+</div>
+</body>
+</html>
