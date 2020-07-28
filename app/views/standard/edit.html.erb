@@ -6,6 +6,3 @@
 
 <%= link_to 'Show', [@parent_instance, @instance], remote: @remote, class:  'btn btn-info', target_container: container_id %>
 <%= link_to 'List', [@parent_instance, @model.collection_name], remote: @remote,  class:  'btn btn-info', target_container: container_id  %>
-<div id="flash_container" class="container">
-	<%= render "standard/flash.html" %>
-</div>

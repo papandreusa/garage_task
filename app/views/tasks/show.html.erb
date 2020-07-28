@@ -2,8 +2,3 @@
 <h2><%= @model.name %></h2>
 <% container_id = 'card_' + [@parent_instance&.class&.instance_name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <%= render 'instance', model: @model, instance: @instance, parent_instance: @parent_instance, remote: @remote %>
-
-
-<div id="flash_container" class="container">
-	<%= render "standard/flash.html" %>
-</div>

@@ -6,6 +6,3 @@
 <%= render 'standard/has_many_assocs',  remote: @remote unless @parent_instance %>
 <%= link_to 'Edit', [:edit, @parent_instance, @instance],  remote: @remote, class:  'btn btn-info', target_container: container_id   %>
 <%= link_to 'List', [@parent_instance, @model.collection_name],  remote: @remote, class:  'btn btn-info' , target_container: container_id  %>
-<div id="flash_container" class="container">
-	<%= render "standard/flash.html" %>
-</div>

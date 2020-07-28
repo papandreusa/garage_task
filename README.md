@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+	Please migrate and populate DB with seeds.db: 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+	{name: 'admin', email: 'admin@garage.com', password: '123456', admin_status: true} 
+	{name: 'user1', email: 'user1@garage.com', password: '123456'} 
+	{name: 'user2', email: 'user2@garage.com', password: '123456'} 
+	
+		Ordinary user only have access to  own projects. 
+		Admin have access to any projects. 
+	
+	To enable/disable AJAX press button on the navigation bar.

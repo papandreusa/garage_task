@@ -7,7 +7,4 @@
 </div>
 <br>
 
-<%= link_to "New #{@model.instance_name}", new_instance_path(parent: @parent_instance), remote: @remote, class:  "btn btn-info" %>
-<div id="flash_container" class="container">
-	<%= render "standard/flash.html" %>
-</div>
+<%= link_to "New #{@model.instance_name}", [:new, @parent_instance, @model.instance_name], remote: @remote, class:  "btn btn-info" %>

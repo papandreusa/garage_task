@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
 	require  'errors'
-	belongs_to	:author, class_name: :User, optional: true
+	belongs_to	:author, class_name: :User,  optional: true
+
 	has_many :tasks, ->{order('priority desc')}, dependent: :delete_all
 
 	validates :name, presence: true, length: { minimum: 3 }

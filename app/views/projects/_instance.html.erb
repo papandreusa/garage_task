@@ -12,7 +12,7 @@
 	        <%= instance.author.email %>
 	      </div >
 	      <div class="col-md text-right">
-	        <%# link_to  [instance], remote: remote, class:  "", title: "view"  do fa_icon 'eye', class: "text-white" end %>&nbsp;
+	        <%= link_to  [instance], remote: remote, class:  "", title: "view"  do fa_icon 'eye', class: "text-white" end %>&nbsp;
 	        <%= link_to  [:edit, instance], remote: remote, class:  "", title: "edit"  do fa_icon 'edit', class: "text-white" end %>&nbsp;
 	        <%= link_to  polymorphic_url([instance]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", title: "delete" do fa_icon 'trash', class: "text-white" end %>
 	      </div>

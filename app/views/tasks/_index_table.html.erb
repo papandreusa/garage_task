@@ -1,4 +1,4 @@
-
+<% if request.xhr? %>
   <div class="">
 		<% instance = Task.new %>
 		<% container_id = 'card_' + [:project, parent_instance.id, :tasks].compact.join('_') %>
@@ -16,7 +16,7 @@
 
     <% end %>
   </div>
-
+<% end %>
 
 <% if collection_total_entries != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
@@ -39,7 +39,7 @@
 						</td>
 	        <% end %>
 					<td class="text-right">
-		        <%# link_to [parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "view" do fa_icon 'eye' end %>&nbsp;
+		        <%= link_to [parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "view" do fa_icon 'eye' end %>&nbsp;
 		        <%= link_to [:edit, parent_instance, record], remote: remote, class:  "", target_container: container_id, title: "edit" do fa_icon 'edit' end %>&nbsp;
 		        <%= link_to polymorphic_url([parent_instance, record]), method: :delete, data: { confirm: 'Are you sure?' }, remote: remote, class:  "", target_container: container_id, title: "trash" do fa_icon 'trash' end %>
 					</td>

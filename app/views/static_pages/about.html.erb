@@ -4,18 +4,22 @@
 	<h1>SIMPLE TODO LISTS</h1>
 	<h2>FROM RUBY GARAGE</h2>
 	<br/> <br/>
-		Please migrate and seed db. <br/>
+		Please migrate and populate DB with seeds.db: <br/>
+	<br/>
+	{name: 'admin', email: 'admin@garage.com', password: '123456', admin_status: true} <br/>
+	{name: 'user1', email: 'user1@garage.com', password: '123456'} <br/>
+	{name: 'user2', email: 'user2@garage.com', password: '123456'} <br/>
 	<br/>
 		Ordinary user only have access to  own projects. <br/>
 		Admin have access to any projects. <br/>
 	<br/>
-	To enable/disable AJAX press button on navigation bar.<br/>
+	To <b>enable/disable AJAX</b> press button on the navigation bar.<br/>
 
 	<div class="text-center">
 		<%= link_to "TODO LISTS", projects_path,  class: "btn btn-lg border rounded-pill bg-info" %>
 	</div>
 
 	<br/>
-	<%= link_to "SQL Task", 'sql_task.html',  class: " " %>
+	<%= link_to "Link to Answers the SQL Task", 'sql_task.html',  class: " " %>
 
 </div>

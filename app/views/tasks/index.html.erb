@@ -1,4 +1,4 @@
-
+<%= render 'standard/show_parent' if @parent_instance %>
 <h1><%= @model.collection_rendering_name %></h1>
 <% container_id = [@parent_instance&.class&.name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <div id='<%= container_id %>' class='container' >

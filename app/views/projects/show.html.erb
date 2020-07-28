@@ -6,6 +6,3 @@
 	<%= link_to 'Edit', [:edit,  @instance],  remote: @remote, class:  'btn btn-sm btn-info'   %>
 	<%= link_to "#{@model.collection_rendering_name}", [:projects],  remote: @remote, class:  'btn btn-sm btn-info'  %>
 </div>
-<div id="flash_container" class="container">
-	<%= render "standard/flash.html" %>
-</div>
