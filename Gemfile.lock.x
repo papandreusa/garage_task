@@ -83,6 +83,7 @@ GEM
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.13.1)
+    ffi (1.13.1-x64-mingw32)
     font-awesome-rails (4.7.0.5)
       railties (>= 3.2, < 6.1)
     globalid (0.4.2)
@@ -117,11 +118,15 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     msgpack (1.3.3)
+    msgpack (1.3.3-x64-mingw32)
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.10-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     pg (1.2.3)
+    pg (1.2.3-x64-mingw32)
     popper_js (1.16.0)
     pry (0.13.1)
       coderay (~> 1.1)
@@ -194,6 +199,8 @@ GEM
       tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc (2.4.0-x64-mingw32)
+      ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
       sassc (>= 2.0)
@@ -216,6 +223,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     warden (1.2.8)
@@ -231,6 +240,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   better_errors
@@ -259,7 +269,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.1.4
