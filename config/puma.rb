@@ -13,7 +13,9 @@ port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
+# environment  "production"
 environment ENV.fetch("RAILS_ENV") { "development" }
+# environment ENV.fetch("RAILS_ENV") { "production" }
 
 # Specifies the `pidfile` that Puma will use.
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
@@ -35,3 +37,12 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+##
+port = ENV['PORT'] || 3000
+# port_ssl = ENV['PORT_SSL'] || 3011
+# ssl_key = ENV['SSL_KEY'] || "server.key"
+# ssl_cert = ENV['SSL_CERT'] || "server.crt"
+# bind "tcp://#{ip_addr}:#{port}"
+# if ssl_key.present? && ssl_cert.present?
+#   bind "ssl://#{ip_addr}:#{port_ssl}?key=#{ssl_key}&cert=#{ssl_cert}"
+# end

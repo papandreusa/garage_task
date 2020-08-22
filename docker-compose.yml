@@ -10,10 +10,11 @@ services:
       dockerfile: Dockerfile
       args:
         - APP_DIR_ARG=${APP_DIR}
-    # command: bash
     tty: true
     stdin_open: true
     restart: on-failure
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
     env_file: .env
     volumes:
       - ${HOST_APP_DIR}:${APP_DIR}
@@ -32,7 +33,18 @@ services:
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_DB: garage_task_development
+      # POSTGRES_MULTIPLE_DATABASES: garage_task_development,garage_task_test,garage_task_production
     volumes:
-    - postgres:/var/lib/postgresql/data
-    # - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/databases-postgres-init.sql
+      - postgres:/var/lib/postgresql/data
+      - ./docker_postgres_init:/docker-entrypoint-initdb.d
+      # - ../docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+        PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+        PGADMIN_DEFAULT_PASSWORD: "test123!"
+    ports:
+        - "16543:80"
+    depends_on:
+        - db

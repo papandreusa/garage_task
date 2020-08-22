@@ -27,7 +27,7 @@ module GarageTask
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
         ##
-    config.web_console.whitelisted_ips = '172.18.0.0/24'
+
 		config.serve_static_assets = true
   end
 end

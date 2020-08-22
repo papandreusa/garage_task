@@ -9,10 +9,12 @@ RUN mkdir -p ${APP_DIR}
 WORKDIR ${APP_DIR}
 
 RUN gem install bundler
-# RUN bundle update --bundler
+
 COPY Gemfile ${APP_DIR}/Gemfile
 COPY Gemfile.lock ${APP_DIR}/Gemfile.lock
+#RUN bundle update --bundler
 
+COPY docker_postgres_init.sql ${APP_DIR}/docker_postgres_init.sql
 RUN  bundle install
 #COPY . ${APP_DIR}
 

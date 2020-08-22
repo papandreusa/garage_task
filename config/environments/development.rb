@@ -63,4 +63,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   ####
   BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+
+  config.web_console.whitelisted_ips = '0.0.0.0' if config.respond_to? :web_console
+  config.web_console.development_only = true if config.respond_to? :web_console
 end
