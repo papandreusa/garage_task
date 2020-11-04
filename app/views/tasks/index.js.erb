@@ -1,0 +1,10 @@
+Notification.requestPermission().then(function(result) {
+  console.log(result);
+});
+if (Notification.permission === 'granted' ){
+  let title = 'Push notification';
+  let options = {
+    body: '<%= Time.now.strftime('%F %T')%> \n Body of message',
+    };
+  var notification = new Notification( title, options );
+}

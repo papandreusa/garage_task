@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+
 	get 'home' => 'static_pages#about'
 	get 'process_ajax' => 'static_pages#process_ajax'
 	match 'about', to: 'static_pages#about', via: :get
 
-  devise_for :users, defaults: {format: :html}
+  devise_for :users, defaults: {format: :html}, controllers: {
+        sessions: 'users/sessions'
+      }
   devise_scope :user do
 	  get '/login', to: 'devise/sessions#new', defaults: {format: :html}
 		post '/login', to: 'devise/sessions#create', defaults: {format: :html}
@@ -15,8 +18,7 @@ Rails.application.routes.draw do
   	  resources :tasks, defaults: {format: :html}, parent: 'Project'
   end
 
-
-
+  mount ActionCable.server => '/cable'
 
   root	'static_pages#about'
 end

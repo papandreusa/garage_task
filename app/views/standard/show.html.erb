@@ -1,6 +1,6 @@
 <%= render 'standard/show_parent' if @parent_instance %>
 <h2><%= @model.name %></h2>
-<% container_id = 'card_' + [@parent_instance.class.instance_name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
+<% container_id = 'card_' + [@parent_instance&.class&.instance_name, @parent_instance&.id, @model.collection_name].compact.join('_') %>
 <%= render 'standard/instance', instance: @instance, remote: @remote %>
 
 <%= render 'standard/has_many_assocs',  remote: @remote unless @parent_instance %>

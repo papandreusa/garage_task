@@ -1,8 +1,14 @@
 module Errors
 
-	class UnauthorizedException < StandardError
+	class UnauthorizedAccessException < StandardError
 		def message
-			"Unauthorized access"
+			"Unauthorized access!"
+		end
+	end
+# ##############################################################################
+	class MethodNotImplementedException < StandardError
+		def message
+			"Method not implemented yet."
 		end
 	end
 end

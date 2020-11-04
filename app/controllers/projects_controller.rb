@@ -1,21 +1,18 @@
 class ProjectsController < StandardController
 
+# after_action  :broadcast_to_info_channel, only: [:create, :destroy]
 
-	private
+def create
+  super
+end
 
-	def set_rendering_templates
-		super
-		@index_template = 'index'
-		@index_table_template = "index"
-		@show_template = 'show'
-		@new_template = 'new'
-		@edit_template = 'edit'
-		@instance_template = "show"
-		@form_template = "edit"
-	end
+private
 
-	def instance_params
-    super_params = super
-		super.merge({author_id: current_user.id})
+	def init_params
+		{ author_id: current_user.id }
+  end
+
+  def broadcast_to_info_channel
+    ActionCable.server.broadcast "info_channel", project_count: @model.count
   end
 end

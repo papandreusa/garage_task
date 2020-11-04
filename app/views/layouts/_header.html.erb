@@ -9,9 +9,11 @@
       <!-- <li class="nav-item"><%= link_to "Tasks", tasks_path,  class: "nav-link" %></li> -->
       <li class="nav-item"><%= link_to "TODO LISTS", projects_path,  class: "nav-link" %></li>
       <li class="nav-item"><%= link_to "About", about_path,  class: "nav-link" %></li>
-
     </ul>
+
 		<ul class="navbar-nav ml-auto">
+      <span class="navbar-text text-info px-2 " title = "Project counts">P: <span id='project_count' >0</span></span>
+      <span class="navbar-text text-info px-2 " title = "Task counts">T: <span id='task_count' >0</span></span>
 			<% if user_signed_in? %>
 				<li>
 					<%=
@@ -27,6 +29,7 @@
 					<%= current_user.email %>
 					</span>
 				</span>
+
         <li>
           <%= link_to "Log out", logout_path, method: "delete",  class: "nav-link "  %>
         </li>

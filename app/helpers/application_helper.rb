@@ -1,3 +1,4 @@
 module ApplicationHelper
-	 include StandardHelper::InstanceMethods
+	
+	 include StandardHelper
 end

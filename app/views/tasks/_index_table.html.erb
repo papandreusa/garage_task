@@ -18,7 +18,7 @@
   </div>
 <% end %>
 
-<% if collection_total_entries != 0 %>
+<% if collection_total_count != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
 		<thead >
 	    <tr class=''>
@@ -48,5 +48,5 @@
 	  </tbody>
 	</table>
 <% end %>
-<div class='bg-light'>Total: <%= pluralize collection_total_entries, model.instance_rendering_name  %> </div>
+<div class='bg-light'>Total: <%= pluralize collection_total_count, model.instance_rendering_name  %> </div>
 <br/>

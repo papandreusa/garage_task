@@ -1,6 +1,6 @@
 
 <%= content_tag :div,  class: "debug_dump" do %>
-  <% debug_variables = [:params, :@model, :@instance, :@collection, '@model.get_model_config', '@model.get_has_many_assocs', :@parent_model, :@parent_instance] %>
+  <% debug_variables = [:params, :@model, :@instance, :@collection, '@model.model_config', '@model.get_has_many_assocs', :@parent_model, :@parent_instance] %>
   <% debug_variables.each do |v| %>
   <div class="row">
     <div class="col-md-2 "><b><%= "#{v.to_s} :" %></b></div>

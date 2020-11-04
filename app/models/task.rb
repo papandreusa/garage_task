@@ -22,14 +22,14 @@ class Task < ApplicationRecord
 
 	def authorized(id)
 		return self if self.author_id == id
-		raise Errors::UnauthorizedException
+		raise Errors::UnauthorizedAccessException
 	end
 
 	def self.authorized(id)
 		self.where(project_id: Project.where(author_id: id).pluck(:id))
 	end
 
-	def self.get_belongs_to_assoc_names
+	def self.belongs_to_assoc_names
 		[:project]
 	end
 

@@ -17,12 +17,12 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//------------------------------------------------------------------
+
 function init(){
   handle_ajax('main_container');
   autohide_alert();
 }
-//------------------------------------------------------------------
+
 function handle_ajax(cont_id = 'main_container') {
   console.log('handle_ajax');
   $("[data-remote]")
@@ -31,45 +31,60 @@ function handle_ajax(cont_id = 'main_container') {
     if (container_id == undefined) container_id = cont_id;
     console.log(this.tagName + ': ' + $(this).attr('target_container'));
     [data, status, xhr] = event.detail;
-    render_success_response(data, status, xhr, container_id);
+    render_success_response( xhr, container_id);
   })
   .on("ajax:error", function(event){
     container_id = $(this).prop('target_container');
     if (container_id == undefined) container_id = cont_id;
     [data, status, xhr] = event.detail;
-    $("#" + container_id).html( "<p>ERROR</p>");
+    $("#" + container_id).text( "<p>ERROR</p>" + xhr.responseText);
     render_status(xhr);
   })
 }
-//------------------------------------------------------------------
-function render_success_response(data, status, xhr, cont_id) {
-  render_data(xhr, cont_id);
-  render_status(xhr);
+
+function render_success_response( xhr, container_id) {
+    data = JSON.parse(xhr.responseText);
+    payload = data['payload'];
+    content_type = data['content_type'];
+    status = xhr.status;
+    console.log(data);
+  if (content_type == 'js') {
+    render_js_data(payload, status);
+  } else {
+    render_html_data(payload, container_id);
+
+    handle_ajax();
+  }
+  render_status(status);
   handle_ajax();
   autohide_alert();
 }
-// ------------------------------------------------------------------
-function render_data(xhr, container_id) {
-	$("#" + container_id).html(xhr.responseText);
-  // console.log(xhr.responseText);
+
+function render_html_data(data, container_id) {
+	$("#" + container_id).html(data);
 }
-// ------------------------------------------------------------------
-function render_status(xhr) {
+
+function render_js_data(data, status) {
+  // console.log(data);
+  eval(data);
+}
+
+function render_status(status) {
 	container = $('footer div.container');
   newDate = new Date();
-	container.html('' + newDate.toLocaleTimeString() + ' ---  Status: ' + xhr.status );
+	container.html('' + newDate.toLocaleTimeString() + ' ---  Status: ' + status );
 }
-//------------------------------------------------------------------
+
 function remote_request(cont_id, url){
   $.ajax({
     url: url,
-    dataType: "html",
+    dataType: "json",
     success: function(data, status, xhr){
-      render_success_response(data, status, xhr, cont_id);
+      render_success_response(xhr, cont_id);
     }
   });
 }
-//------------------------------------------------------------------
+
 function toggle_card(cont_id, url) {
   if ($( "#" + cont_id ).is( ":hidden" )) {
       $('#card_' + cont_id + '').html('loading ...');
@@ -78,10 +93,8 @@ function toggle_card(cont_id, url) {
   // $('#' + cont_id).collapse('toggle');
 }
 
-//------------------------------------------------------------------
 function autohide_alert() {
 	$("div.alert").fadeTo(5000, 500).slideUp(500, function(){
     $(this).remove();
 	});
 }
-//------------------------------------------------------------------

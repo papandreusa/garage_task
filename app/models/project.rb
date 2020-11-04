@@ -1,10 +1,10 @@
 class Project < ApplicationRecord
 	require  'errors'
+
 	belongs_to	:author, class_name: :User,  optional: true
+	has_many :tasks, ->{ order('priority desc') }, dependent: :delete_all
 
-	has_many :tasks, ->{order('priority desc')}, dependent: :delete_all
-
-	validates :name, presence: true, length: { minimum: 3 }
+	default_scope {order('created_at desc')}
 
 # SELECT projects.*, count(tasks.id) as tasks_count FROM projects LEFT JOIN tasks  ON tasks.project_id = projects.id  GROUP BY projects.id  ORDER BY tasks_count DESC
 	scope :tasks_count, ->{left_joins(:tasks).select('projects.*', 'count(tasks.id) as tasks_count').group('projects.id').order('tasks_count desc')}
@@ -22,9 +22,13 @@ class Project < ApplicationRecord
 # select projects.name  from projects left  join tasks on tasks.project_id = projects.id  group by projects.id having (count(tasks) > 10) order by projects.id
 	scope :more_10_tasks, ->{left_joins(:tasks).select('projects.name').where('tasks.status = "completed"').group('projects.id').having('count(tasks.id) > 10').order('projects.id')}
 
-private
+	validates :name, presence: true, length: { minimum: 3 }
+
+  after_commit { ProjectBroadcastJob.perform_later(self.class.name) }
+# ---------------------------------------------------------------------------------------
 
 public
+
 	def author_email
 		author&.email
 	end
@@ -33,18 +37,13 @@ public
 		"#{self.name}"
 	end
 
-	def authorized(id)
-		return self if User.find(id)&.admin_status
-		return self if self.author_id == id
-		raise Errors::UnauthorizedException
-	end
+# 	def self.authorized_scope(user_id)
+# 		return self if User.find(user_id)&.admin_status
+# 		self.where(author_id: user_id)
+# 	end
 
-	def self.authorized(id)
-		return self if User.find(id)&.admin_status
-		self.where(author_id: id)
-	end
-
-	def self.get_belongs_to_assoc_names
+	def self.belongs_to_assoc_names
 		[:author]
 	end
+
 end

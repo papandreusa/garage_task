@@ -1,5 +1,5 @@
 
-<% if collection_total_entries != 0 %>
+<% if collection_total_count != 0 %>
 	<table class="table table-sm table-hover table-bordered table-fixed">
 	  <thead>
 	    <tr>
@@ -25,4 +25,4 @@
 	  </tbody>
 	</table>
 <% end %>
-<div class='bg-secondary'>Total: <%= pluralize collection_total_entries, 'record'  %> </div>
+<div class='bg-secondary'>Total: <%= pluralize collection_total_count, 'record'  %> </div>

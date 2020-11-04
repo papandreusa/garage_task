@@ -38,7 +38,7 @@ RSpec.describe Project, type: :model do
 		end
 
 		it "ordinary user have not access to project of other user" do
-		  expect{project_of_user1.authorized(user2.id)}.to raise_error(Errors::UnauthorizedException)
+		  expect{project_of_user1.authorized(user2.id)}.to raise_error(Errors::UnauthorizedAccessException)
 			expect(Project.authorized(user2.id).all).to_not include project_of_user1
 		end
   end

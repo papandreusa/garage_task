@@ -177,3 +177,8 @@ a:hover {
 .card{
 	background-color: #f0f0f0 !important;
 }
+.card-body {
+  max-height: 500px;
+  min-height: 150px;
+  overflow-y: scroll;
+}
